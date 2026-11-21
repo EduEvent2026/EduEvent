@@ -1,0 +1,35 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: eduevent_m4_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: eduevent_registrations
+      MYSQL_USER: eduevent
+      MYSQL_PASSWORD: eduevent
+    ports:
+      - "3306:3306"
+    volumes:
+      - m4_mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-ueduevent", "-peduevent"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  registrations:
+    build: .
+    container_name: eduevent_registrations
+    ports:
+      - "8004:8004"
+    environment:
+      DATABASE_URL: mysql+pymysql://eduevent:eduevent@mysql:3306/eduevent_registrations
+      DEV_MOCK_EXTERNAL_APIS: "true"
+      DEV_AUTH_BYPASS: "true"
+      DEV_DEFAULT_EVENT_CAPACITY: "2"
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+volumes:
+  m4_mysql_data:
