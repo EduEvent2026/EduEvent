@@ -30,18 +30,7 @@ class EventProjection(Base):
         back_populates="event"
     )
 
-class UserProjection(Base):
-    """Lokalna kopia identyfikatora użytkownika (projekcja z Modułu 1)."""
-
-    __tablename__ = "user_projections"
-
-    id: Mapped[str] = mapped_column(CHAR(36), primary_key=True)
-
-    registrations: Mapped[list["Registration"]] = relationship(
-        back_populates="user"
-    )
-
-
+    
 
 
 class AttendanceRecord(Base):
