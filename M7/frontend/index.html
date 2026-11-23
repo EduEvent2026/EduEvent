@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduEvent – Powiadomienia In-App</title>
+    <style>
+        body { font-family: system-ui, sans-serif; max-width: 720px; margin: 2rem auto; padding: 0 1rem; }
+        header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid white; padding-bottom: 1rem; }
+        .badge { background: red; color: white; border-radius: 999px; padding: 0.15rem 0.55rem; font-size: 0.85rem; }
+        .item { border: 1px solid whitesmoke; border-radius: 8px; padding: 1rem; margin-top: 0.75rem; }
+        .item.unread { border-left: 4px solid blue; background: #f5f9ff; }
+        .actions { margin-top: 0.5rem; display: flex; gap: 0.5rem; }
+        button { cursor: pointer; padding: 0.35rem 0.75rem; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Powiadomienia</h1>
+        <div>Nieprzeczytane: <span id="unread-badge" class="badge">0</span></div>
+    </header>
+    <main id="notifications-list"></main>
+
+    <script type="module" src="./notificationsView.js"></script>
+</body>
+</html>
