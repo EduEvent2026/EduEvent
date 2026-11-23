@@ -1,0 +1,1 @@
+# komunikacja z innymi modułami 2 i 4

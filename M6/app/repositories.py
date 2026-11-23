@@ -1,0 +1,1 @@
+# odczyt zapis rekordów obecności w bazie danych
