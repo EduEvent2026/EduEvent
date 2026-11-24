@@ -1,0 +1,36 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: eduevent_m7_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: eduevent_notifications
+      MYSQL_USER: eduevent
+      MYSQL_PASSWORD: eduevent
+    ports:
+      - "3307:3306"
+    volumes:
+      - m7_mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-ueduevent", "-peduevent"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  notifications:
+    build: .
+    container_name: eduevent_notifications
+    ports:
+      - "8007:8007"
+    environment:
+      DATABASE_URL: mysql+pymysql://eduevent:eduevent@mysql:3306/eduevent_notifications
+      EVENTS_API_URL: http://events:8002
+      KEYCLOAK_JWKS_URL: http://keycloak:8080/realms/eduevent/protocol/openid-connect/certs
+      KEYCLOAK_ISSUER: http://keycloak:8080/realms/eduevent
+      REMINDER_INTERVAL_SECONDS: "60"
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+volumes:
+  m7_mysql_data:
