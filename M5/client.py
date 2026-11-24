@@ -12,5 +12,5 @@ class EventsApiClient:
     def __init__(self, events_api: IEventsAPI | None = None) -> None:
         self._events_api = events_api
 
-    def fetchEvents(self, from_date: date, to_date: date) -> list[Event]:
+    def fetch_events(self, from_date: date, to_date: date) -> list[Event]:
         pass

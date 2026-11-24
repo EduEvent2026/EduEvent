@@ -7,5 +7,5 @@ class IEventsAPI(ABC):
     """Kontrakt API modułu 2 (Wydarzenia i kategorie)."""
 
     @abstractmethod
-    def getEvents(self, from_date: date, to_date: date) -> list[Event]:
+    def get_events(self, from_date: date, to_date: date) -> list[Event]:
         pass

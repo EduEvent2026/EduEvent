@@ -15,7 +15,7 @@ class CalendarService:
 
     def build_view(self, view_type: ViewType, target_date: dt.date) -> CalendarView:
         start, end = self._calculate_range(view_type, target_date)
-        events = self._events_client.fetch_events(start - dt.timedelta(days=1), end + dt.timedelta(days=1))
+        events = self._eventsClient.fetch_events(start - dt.timedelta(days=1), end + dt.timedelta(days=1))
         days = self._group_by_day(events, start, end)
         return CalendarView(view_type, start, end, days)
 
