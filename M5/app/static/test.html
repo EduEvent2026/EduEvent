@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel — Kalendarz</title>
+</head>
+<body>
+  <header>
+  </header>
+
+  <main>
+    <h1>Kalendarz zajęć</h1>
+    <div id="kalendarz"></div>
+  </main>
+
+  <!-- Przykładowe podpięcie js do htmla -->
+  <script type="module">
+    import { mountCalendar } from "./calendar.js";
+
+    const container = document.querySelector("#kalendarz");
+    const calendar = mountCalendar(container, {
+      apiBase: "http://localhost:8000",
+      initialView: "MONTH",
+      timeZone: "Europe/Warsaw",
+    });
+
+    window.addEventListener("beforeunload", () => {
+      calendar.destroy();
+    });
+  </script>
+</body>
+</html>
