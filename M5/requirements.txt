@@ -1,2 +1,5 @@
-fastapi
+fastapi>=0.115.0
 starlette
+uvicorn[standard]>=0.32.0
+requests>=2.32.0
+tzdata>=2024.2
